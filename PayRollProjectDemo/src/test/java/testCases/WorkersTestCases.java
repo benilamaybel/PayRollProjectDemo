@@ -1,9 +1,8 @@
 package testCases;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -53,7 +52,9 @@ public class WorkersTestCases extends BaseClass {
 			wu = new WaitUtilities();
 			//wu.waitElementClickable(driver, editElement);
 			wu.fluentWaitElementClickable(driver, editElement);
-			editElement.click();
+			Actions actions = new Actions(driver);
+			actions.moveToElement(editElement).click().build().perform();
+		//	editElement.click();
 			expected = "UPDATE WORKER: " + searchElement.toUpperCase();
 			actual = w.verifyPageTitle(driver, searchElement.toUpperCase());
 			Assert.assertEquals(actual, expected, Constant.w_editWorker);
