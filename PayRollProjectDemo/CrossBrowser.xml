@@ -12,12 +12,12 @@
 		</groups>
 		<classes>
 			<class name="testCases.LoginTestCase"></class>
-			<class name="testCases.ClientTestCases"></class>
+			<class name="testCases.ClientTestCases"></class> 
 			<class name="testCases.WorkersTestCases"></class> 
-			<class name="testCases.TimeSheetTestCases"></class>
+			<class name="testCases.TimeSheetTestCases"></class> 
+			<class name="testCases.DashBoardTestCases"></class> 
 		</classes>
 	 </test>
-	<!--
 	<test name="EdgeTest">
 		<parameter name="browser" value="edge"></parameter>
 		<groups>
@@ -30,6 +30,7 @@
 			<class name="testCases.ClientTestCases"></class>
 			<class name="testCases.WorkersTestCases"></class>
 			<class name="testCases.TimeSheetTestCases"></class>
+			<class name="testCases.DashBoardTestCases"></class> 
 		</classes>
-	</test> -->
+	</test> 
 </suite>

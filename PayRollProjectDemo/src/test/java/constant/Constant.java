@@ -14,6 +14,6 @@ public class Constant {
 	public static final String w_editWorkerBankPage = "You are not in Bank Details page!!!";
 	public static final String w_editWorkerBankDate = "Incorrect Date !!!";
 	public static final String w_editWorkerSave = "Incorrect Page!!!";
-	public static final String tsverifyLogOutText = "You are not in Login Page!!!";
+	public static final String db_verifyLogOutText = "You are not in Login Page!!!";
 	
 }

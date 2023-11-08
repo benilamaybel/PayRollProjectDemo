@@ -72,14 +72,4 @@ public class TimeSheetTestCases extends BaseClass {
 		ts.dismissTimeSheetAlert();
 		Assert.assertEquals(actual,expected ,Constant.ts_verifyTimeSheetTitle );
 	}
-	@Test
-	public void logout() throws InterruptedException {
-		lp = new LoginPage(driver);
-		lp.performloginUsingExcelInput(inputExcelFileName, loginSheetName);
-		ts = new TimeSheet(driver);
-		ts.performLogout(driver);
-		String expected = "LOGIN";
-		String actual = lp.getLoginPageText();
-		Assert.assertEquals(actual,expected ,Constant.tsverifyLogOutText);
-	}
 }
