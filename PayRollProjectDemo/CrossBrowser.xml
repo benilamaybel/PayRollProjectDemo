@@ -1,0 +1,35 @@
+<suite name="PayrollProject" parallel="tests" thread-count="2">
+	<listeners>
+			<listener class-name="utilities.RetryListener"/>
+			<listener class-name="utilities.ExtenetReport" />
+	</listeners>		
+	<test name="ChromeTest">
+		<parameter name="browser" value="chrome"></parameter>
+		<groups>
+			<run>
+				<include name ="Smoke"></include>
+			</run>
+		</groups>
+		<classes>
+			<class name="testCases.LoginTestCase"></class>
+			<class name="testCases.ClientTestCases"></class>
+			<class name="testCases.WorkersTestCases"></class> 
+			<class name="testCases.TimeSheetTestCases"></class>
+		</classes>
+	 </test>
+	<!--
+	<test name="EdgeTest">
+		<parameter name="browser" value="edge"></parameter>
+		<groups>
+			<run>
+				<include name ="Smoke"></include>
+			</run>
+		</groups>
+		<classes>
+			<class name="testCases.LoginTestCase"></class>
+			<class name="testCases.ClientTestCases"></class>
+			<class name="testCases.WorkersTestCases"></class>
+			<class name="testCases.TimeSheetTestCases"></class>
+		</classes>
+	</test> -->
+</suite>
