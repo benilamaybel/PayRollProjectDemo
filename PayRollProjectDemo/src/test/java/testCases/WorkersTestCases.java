@@ -50,7 +50,8 @@ public class WorkersTestCases extends BaseClass {
 
 			WebElement editElement = driver.findElement(By.xpath(locatorEdit));
 			wu = new WaitUtilities();
-			wu.waitElementClickable(driver, editElement);
+			//wu.waitElementClickable(driver, editElement);
+			wu.fluentWaitElementClickable(driver, editElement);
 			editElement.click();
 			expected = "UPDATE WORKER: " + searchElement.toUpperCase();
 			actual = w.verifyPageTitle(driver, searchElement.toUpperCase());
