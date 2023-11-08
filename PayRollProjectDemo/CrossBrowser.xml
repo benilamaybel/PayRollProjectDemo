@@ -1,8 +1,8 @@
 <suite name="PayrollProject" parallel="tests" thread-count="2">
-	<!-- <listeners>
+	<listeners>
 			<listener class-name="utilities.RetryListener"/>
 			<listener class-name="utilities.ExtenetReport" />
-	</listeners>		 -->
+	</listeners>		
 	<test name="ChromeTest">
 		<parameter name="browser" value="chrome"></parameter>
 		<groups>
