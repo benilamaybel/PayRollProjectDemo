@@ -42,7 +42,6 @@ public class WorkersTestCases extends BaseClass {
 		w.enterWorkerName(searchString);
 		String searchElement = w.getWorkerNameFromExcel(inputExcelFileName, workerSheetName);
 		w.clickSearch();
-		//Thread.sleep(5000);
 		int elementIndex = w.searchWorker(driver, searchElement);
 		if (elementIndex >= 0) { // edit details only when element is present/found in search result list
 			String locatorEdit = "//table[@class='table table-striped table-bordered']//tbody//tr[" + (elementIndex + 1)
@@ -62,7 +61,7 @@ public class WorkersTestCases extends BaseClass {
 			w.enterBankStartDate(setDate);
 			gu.scrollDown(driver);
 			w.saveWorker();
-			Thread.sleep(5000); // Needed for the header to refresh
+		//	Thread.sleep(5000); // Needed for the header to refresh
 			expected = searchElement.toUpperCase();
 			actual = w.verifyPageTitle(driver, searchElement.toUpperCase());
 			Assert.assertEquals(actual, expected, Constant.w_editWorkerSave);
