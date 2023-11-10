@@ -89,7 +89,6 @@ public class Workers {
 		} catch (Exception e) {
 			actualTitleText = title.getText();
 			System.out.println("Exception Captured !" + e);
-			System.out.println("title is " + actualTitleText);
 		}
 		return actualTitleText;
 	}

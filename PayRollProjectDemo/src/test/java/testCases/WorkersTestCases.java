@@ -61,7 +61,7 @@ public class WorkersTestCases extends BaseClass {
 			w.enterBankStartDate(setDate);
 			gu.scrollDown(driver);
 			w.saveWorker();
-		//	Thread.sleep(5000); // Needed for the header to refresh
+			Thread.sleep(5000); // Needed for the header to refresh
 			expected = searchElement.toUpperCase();
 			actual = w.verifyPageTitle(driver, searchElement.toUpperCase());
 			Assert.assertEquals(actual, expected, Constant.w_editWorkerSave);
