@@ -31,6 +31,7 @@ public class BaseClass {
 	public static void testBasic() throws IOException {
 
 		pro = new Properties();
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		FileInputStream fp = new FileInputStream(
 				System.getProperty("user.dir") + "\\src\\main\\resources\\Properties\\config.properties");
 		pro.load(fp);
