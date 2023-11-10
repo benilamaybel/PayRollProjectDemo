@@ -32,7 +32,7 @@ public class WorkersTestCases extends BaseClass {
 		gu.acceptAlert(driver);
 	}
 
-	@Test (groups="Smoke")
+	@Test(groups = "Smoke")
 	public void searchAndEditWorker() throws InterruptedException {
 		lp = new LoginPage(driver);
 		lp.performloginUsingExcelInput(inputExcelFileName, loginSheetName);
@@ -44,19 +44,22 @@ public class WorkersTestCases extends BaseClass {
 		w.clickSearch();
 		Thread.sleep(5000);
 		int elementIndex = w.searchWorker(driver, searchElement);
-		System.out.println("Element Index = "+elementIndex);
+		System.out.println("Element Index = " + elementIndex);
 		if (elementIndex >= 0) { // edit details only when element is present/found in search result list
 			System.out.println("Inside IF");
 			String locatorEdit = "//table[@class='table table-striped table-bordered']//tbody//tr[" + (elementIndex + 1)
 					+ "]//td[8]//span[@class='glyphicon glyphicon-pencil']";
 
 			WebElement editElement = driver.findElement(By.xpath(locatorEdit));
+			gu.scrollDown(driver);
 			wu = new WaitUtilities();
-			//wu.waitElementClickable(driver, editElement);
+			// wu.waitElementClickable(driver, editElement);
 			wu.fluentWaitElementClickable(driver, editElement);
-			
-			/*Actions actions = new Actions(driver);
-			actions.moveToElement(editElement).click().build().perform();*/
+
+			/*
+			 * Actions actions = new Actions(driver);
+			 * actions.moveToElement(editElement).click().build().perform();
+			 */
 			editElement.click();
 			System.out.println("Element is clicked!");
 			expected = "UPDATE WORKER: " + searchElement.toUpperCase();
