@@ -31,7 +31,6 @@ public class BaseClass {
 	public static void testBasic() throws IOException {
 
 		pro = new Properties();
-		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		FileInputStream fp = new FileInputStream(
 				System.getProperty("user.dir") + "\\src\\main\\resources\\Properties\\config.properties");
 		pro.load(fp);
@@ -74,6 +73,7 @@ public class BaseClass {
 	@AfterMethod(alwaysRun = true) // to run always
 	public void afterMethod(ITestResult iTestResult) throws IOException { // ITestResult is a Listener class
 		if (iTestResult.getStatus() == ITestResult.FAILURE) { // executes only when TC Fails
+			System.out.println("Testcase Failed , caling screenshot function!");
 			sc = new ScreenShotCapture(); // Object creation for ScreenShotCapture class
 			sc.captureFailureScreenShot(driver, iTestResult.getName()); // calls captureFailureScreenShot method; passes
 																		// the name of Testcase
