@@ -76,9 +76,18 @@ public class Workers {
 	}
 
 	public String verifyPageTitle(WebDriver driver, String expectedText) {
+		String actualTitleText ="";
+		try {
 		wu.waitTextDisplayed(driver, title, expectedText);
-		String actualTitleText = title.getText();
+		}
+		catch(Exception e)
+		{
+		 actualTitleText = title.getText();
+		 System.out.println("Exception Captured !" +e);
+		 System.out.println("title is "+actualTitleText);
+		}
 		return actualTitleText;
+		
 	}
 
 	public String getBankDate() {
