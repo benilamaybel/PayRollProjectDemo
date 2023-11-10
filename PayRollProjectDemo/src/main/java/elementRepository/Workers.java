@@ -80,20 +80,18 @@ public class Workers {
 		wu.fluentWaitElementClickable(driver, editElement);
 		editElement.click();
 	}
+
 	public String verifyPageTitle(WebDriver driver, String expectedText) {
-		String actualTitleText ="";
+		String actualTitleText = "";
 		try {
-		wu.waitTextDisplayed(driver, title, expectedText);
-		actualTitleText = title.getText();
-		}
-		catch(Exception e)
-		{
-		 actualTitleText = title.getText();
-		 System.out.println("Exception Captured !" +e);
-		 System.out.println("title is "+actualTitleText);
+			wu.waitTextDisplayed(driver, title, expectedText);
+			actualTitleText = title.getText();
+		} catch (Exception e) {
+			actualTitleText = title.getText();
+			System.out.println("Exception Captured !" + e);
+			System.out.println("title is " + actualTitleText);
 		}
 		return actualTitleText;
-		
 	}
 
 	public String getBankDate() {

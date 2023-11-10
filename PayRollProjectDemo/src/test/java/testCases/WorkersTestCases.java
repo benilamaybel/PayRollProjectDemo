@@ -42,23 +42,20 @@ public class WorkersTestCases extends BaseClass {
 		w.enterWorkerName(searchString);
 		String searchElement = w.getWorkerNameFromExcel(inputExcelFileName, workerSheetName);
 		w.clickSearch();
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		int elementIndex = w.searchWorker(driver, searchElement);
 		if (elementIndex >= 0) { // edit details only when element is present/found in search result list
 			String locatorEdit = "//table[@class='table table-striped table-bordered']//tbody//tr[" + (elementIndex + 1)
 					+ "]//td[8]//span[@class='glyphicon glyphicon-pencil']";
-
 			WebElement editElement = driver.findElement(By.xpath(locatorEdit));
 			w.clickOnEditWorker(editElement);
-		//	Thread.sleep(5000);
 			expected = "UPDATE WORKER: " + searchElement.toUpperCase();
-			System.out.println("Expected is "+expected);
 			actual = w.verifyPageTitle(driver, searchElement.toUpperCase());
 			Assert.assertEquals(actual, expected, Constant.w_editWorker);
 			w.navigateToBankDetailsSubMenu();
 			expected = "WORKER BANK DETAILS: " + searchElement.toUpperCase();
 			actual = w.verifyPageTitle(driver, searchElement.toUpperCase());
-			System.out.println("Actual Text = "+actual);
+			System.out.println("Actual Text = " + actual);
 			Assert.assertEquals(actual, expected, Constant.w_editWorkerBankPage);
 			w.clearBankStartDate();
 			String setDate = w.getSetDateFromExcel(inputExcelFileName, workerSheetName);
