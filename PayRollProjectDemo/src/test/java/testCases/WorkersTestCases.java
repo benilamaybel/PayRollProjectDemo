@@ -45,6 +45,7 @@ public class WorkersTestCases extends BaseClass {
 		Thread.sleep(5000);
 		int elementIndex = w.searchWorker(driver, searchElement);
 		if (elementIndex >= 0) { // edit details only when element is present/found in search result list
+			System.out.println("Inside IF");
 			String locatorEdit = "//table[@class='table table-striped table-bordered']//tbody//tr[" + (elementIndex + 1)
 					+ "]//td[8]//span[@class='glyphicon glyphicon-pencil']";
 
@@ -52,9 +53,11 @@ public class WorkersTestCases extends BaseClass {
 			wu = new WaitUtilities();
 			//wu.waitElementClickable(driver, editElement);
 			wu.fluentWaitElementClickable(driver, editElement);
-			Actions actions = new Actions(driver);
-			actions.moveToElement(editElement).click().build().perform();
-		//	editElement.click();
+			
+			/*Actions actions = new Actions(driver);
+			actions.moveToElement(editElement).click().build().perform();*/
+			editElement.click();
+			System.out.println("Element is clicked!");
 			expected = "UPDATE WORKER: " + searchElement.toUpperCase();
 			actual = w.verifyPageTitle(driver, searchElement.toUpperCase());
 			Assert.assertEquals(actual, expected, Constant.w_editWorker);
