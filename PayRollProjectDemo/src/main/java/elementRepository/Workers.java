@@ -51,7 +51,7 @@ public class Workers {
 		gu.enterText(workerNameElement, workerName);
 	}
 
-	public void searchWorker() {
+	public void clickSearch() {
 		searchBtn.click();
 	}
 

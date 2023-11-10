@@ -41,9 +41,10 @@ public class WorkersTestCases extends BaseClass {
 		String searchString = w.getSearchStringFromExcel(inputExcelFileName, workerSheetName);
 		w.enterWorkerName(searchString);
 		String searchElement = w.getWorkerNameFromExcel(inputExcelFileName, workerSheetName);
-		w.searchWorker();
+		w.clickSearch();
 		Thread.sleep(5000);
 		int elementIndex = w.searchWorker(driver, searchElement);
+		System.out.println("Element Index = "+elementIndex);
 		if (elementIndex >= 0) { // edit details only when element is present/found in search result list
 			System.out.println("Inside IF");
 			String locatorEdit = "//table[@class='table table-striped table-bordered']//tbody//tr[" + (elementIndex + 1)
