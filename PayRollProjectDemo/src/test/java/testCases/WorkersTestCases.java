@@ -20,7 +20,7 @@ public class WorkersTestCases extends BaseClass {
 	String expected = "";
 	String actual = "";
 
-	@Test
+	@Test (groups = "Regression", priority = 2)
 	public void deleteWorker() {
 		lp = new LoginPage(driver);
 		lp.performloginUsingExcelInput(inputExcelFileName, loginSheetName);

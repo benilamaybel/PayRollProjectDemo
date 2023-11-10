@@ -14,7 +14,7 @@ public class LoginTestCase extends BaseClass {
 	LoginPage lp;
 	Dashboard d;
 
-	@Test(groups = "Smoke")
+	@Test(groups = "Smoke", priority = 1)
 	public void verifyValidLogin() throws IOException {
 		lp = new LoginPage(driver);
 		d = new Dashboard(driver);
@@ -29,7 +29,7 @@ public class LoginTestCase extends BaseClass {
 		return new Object[][] { { "carolle", "1q2w3e4r" }, { "carol", "password" }, { "username", "password" } };
 	}
 
-	@Test(dataProvider = "validInvalidTestData")
+	@Test(dataProvider = "validInvalidTestData", groups = "Regression", priority = 1)
 	public void verifyInValidLogin(String userName, String passWord) {
 		lp = new LoginPage(driver);
 		lp.performlogin(userName, passWord);

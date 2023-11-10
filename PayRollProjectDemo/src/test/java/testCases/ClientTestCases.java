@@ -31,7 +31,7 @@ public class ClientTestCases extends BaseClass {
 		Assert.assertEquals(actualclient, generatedClientName, Constant.cli_createClient);
 	}
 
-	@Test
+	@Test (groups = "Regression", priority = 1)
 	public void searchAndViewClient() throws InterruptedException {
 		lp = new LoginPage(driver);
 		lp.performloginUsingExcelInput(inputExcelFileName, loginSheetName);

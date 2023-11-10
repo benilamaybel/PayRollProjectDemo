@@ -35,7 +35,7 @@ public class TimeSheetTestCases extends BaseClass {
 		Assert.assertEquals(atualNumber, timeSheetNumber,Constant.ts_createTimeSheetTimeSheetNo );
 	}
 	
-	@Test
+	@Test (groups = "Regression", priority = 2)
 	public void generatePaySlip() throws InterruptedException {
 		lp = new LoginPage(driver);
 		lp.performloginUsingExcelInput(inputExcelFileName, loginSheetName);
@@ -56,7 +56,7 @@ public class TimeSheetTestCases extends BaseClass {
 		Assert.assertEquals(actual,expected ,Constant.ts_verifyTimeSheetTitle );
 	}
 	
-	@Test
+	@Test (groups = "Regression", priority = 2)
 	public void cancelInvoiceGeneraion() throws InterruptedException {
 		lp = new LoginPage(driver);
 		lp.performloginUsingExcelInput(inputExcelFileName, loginSheetName);

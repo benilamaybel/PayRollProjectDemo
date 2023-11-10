@@ -13,7 +13,7 @@ public class DashBoardTestCases extends BaseClass {
 	GeneralUtilities gu;
 	LoginPage lp;
 
-	@Test
+	@Test (groups = "smoke")
 	public void logout() throws InterruptedException {
 		lp = new LoginPage(driver);
 		lp.performloginUsingExcelInput(inputExcelFileName, loginSheetName);
