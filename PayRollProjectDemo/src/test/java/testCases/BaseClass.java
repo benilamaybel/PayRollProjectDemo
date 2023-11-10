@@ -78,6 +78,6 @@ public class BaseClass {
 			sc.captureFailureScreenShot(driver, iTestResult.getName()); // calls captureFailureScreenShot method; passes
 																		// the name of Testcase
 		}
-		 driver.quit();
+		// driver.quit();
 	}
 }

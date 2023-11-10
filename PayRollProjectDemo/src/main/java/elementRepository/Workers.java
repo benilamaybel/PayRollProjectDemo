@@ -75,10 +75,16 @@ public class Workers {
 		saveBtn.click();
 	}
 
+	public void clickOnEditWorker(WebElement editElement) {
+		gu.scrollDown(driver);
+		wu.fluentWaitElementClickable(driver, editElement);
+		editElement.click();
+	}
 	public String verifyPageTitle(WebDriver driver, String expectedText) {
 		String actualTitleText ="";
 		try {
 		wu.waitTextDisplayed(driver, title, expectedText);
+		actualTitleText = title.getText();
 		}
 		catch(Exception e)
 		{
