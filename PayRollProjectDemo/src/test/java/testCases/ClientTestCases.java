@@ -1,5 +1,6 @@
 package testCases;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -18,7 +19,7 @@ public class ClientTestCases extends BaseClass {
 	LoginPage lp;
 
 	@Test(groups="Smoke")
-	public void createClient() throws InterruptedException {
+	public void createClient() throws InterruptedException, IOException {
 		lp = new LoginPage(driver);
 		lp.performloginUsingExcelInput(inputExcelFileName, loginSheetName);
 		cli = new Clients(driver);

@@ -18,7 +18,7 @@ public class TimeSheet {
 	GeneralUtilities gu = new GeneralUtilities();
 	WaitUtilities wu = new WaitUtilities();
 	ExcelUtilities eu = new ExcelUtilities();
-	static int inputTimeSheetNo;
+	static String inputTimeSheetNo;
 	static String inputSearchClientString;
 	static String inputClientValue;
 	static String inputSearchWorkerString;
@@ -26,10 +26,9 @@ public class TimeSheet {
 	static String inputWeekEndDate;
 	static String inputCategoryDropdown;
 	static String inputDescriptionDropdown;
-	static int inputUnits;
-	static int inputPay;
-	static int inputBill;
-
+	static String inputUnits;
+	static String inputPay;
+	static String inputBill;
 
 	public TimeSheet(WebDriver driver) {
 		this.driver = driver;
@@ -88,10 +87,11 @@ public class TimeSheet {
 	WebElement generatePayslip;
 	@FindBy(xpath = "//button[@class='btn btn-warning btn-responsive invoice']")
 	WebElement generateInvoice;
-	@FindBy(xpath="//a[@class='dropdown-toggle']")
+	@FindBy(xpath = "//a[@class='dropdown-toggle']")
 	WebElement userDropdown;
 	@FindBy(xpath = "//a[@class='logout-btn']")
 	WebElement logoutBtn;
+
 	public void gotoTimeSheet() {
 		wu.waitElementClickable(driver, timeSheetMenu);
 		timeSheetMenu.click();
@@ -120,23 +120,26 @@ public class TimeSheet {
 
 	public void getTimeSheetDataFromExcel(String excelFileName, String sheetName) {
 		try {
-			inputTimeSheetNo = eu.getIntegerData(excelFileName,sheetName, 0, 1);
-			inputSearchClientString = eu.getStringData(excelFileName,sheetName, 1, 1);
-			inputClientValue = eu.getStringData(excelFileName,sheetName, 2, 1);
-			inputSearchWorkerString = eu.getStringData(excelFileName,sheetName, 3, 1);
-			inputWorkerValue = eu.getStringData(excelFileName,sheetName, 4, 1);
-			inputWeekEndDate = eu.getStringData(excelFileName,sheetName, 5, 1);
-			inputCategoryDropdown = eu.getStringData(excelFileName,sheetName, 6, 1);
-			inputDescriptionDropdown = eu.getStringData(excelFileName,sheetName, 7, 1);
-			inputUnits = eu.getIntegerData(excelFileName,sheetName, 8, 1);
-			inputPay = eu.getIntegerData(excelFileName,sheetName, 9, 1);
-			inputBill = eu.getIntegerData(excelFileName,sheetName, 10, 1);
+			List<String> excelInputList = eu.getDataFromExcel(excelFileName, sheetName);
+			inputTimeSheetNo = excelInputList.get(1);
+			inputSearchClientString = excelInputList.get(3);
+			inputClientValue = excelInputList.get(5);
+			;
+			inputSearchWorkerString = excelInputList.get(7);
+			inputWorkerValue = excelInputList.get(9);
+			inputWeekEndDate = excelInputList.get(11);
+			inputCategoryDropdown = excelInputList.get(13);
+			inputDescriptionDropdown = excelInputList.get(15);
+			inputUnits = excelInputList.get(17);
+			inputPay = excelInputList.get(19);
+			inputBill = excelInputList.get(21);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public int enterTimeSheetDetails() {
+
+	public String enterTimeSheetDetails() {
 		wu.fluentWaitElementClickable(driver, clientField);
 		gu.selectDropdownByIndex(branchField, 1);
 		clientField.click();
@@ -148,14 +151,14 @@ public class TimeSheet {
 		gu.selectDropdownByIndex(divisionField, 1);
 		weekEndDateField.sendKeys(inputWeekEndDate);
 		gu.selectDropdownByVisibleText(categoryField, inputCategoryDropdown);
-		timeSheetNoField.sendKeys(String.valueOf(inputTimeSheetNo));
+		timeSheetNoField.sendKeys(inputTimeSheetNo);
 		gu.scrollDown(driver);
 		gu.selectDropdownByVisibleText(descriptionDropdown, inputDescriptionDropdown);
 		wu.waitAlertDisplayed(driver);
 		gu.acceptAlert(driver);
-		unitsField.sendKeys(String.valueOf(inputUnits));
-		payField.sendKeys(String.valueOf(inputPay));
-		billField.sendKeys(String.valueOf(inputBill));
+		unitsField.sendKeys(inputUnits);
+		payField.sendKeys(inputPay);
+		billField.sendKeys(inputBill);
 		awrField.click();
 		gu.scrollDown(driver);
 		saveBtn.click();
@@ -182,17 +185,15 @@ public class TimeSheet {
 		wu.waitAlertDisplayed(driver);
 		return gu.getAlertText(driver);
 	}
-	
-	public void acceptTimeSheetAlert()
-	{
+
+	public void acceptTimeSheetAlert() {
 		gu.acceptAlert(driver);
 	}
 
-	public void dismissTimeSheetAlert()
-	{
+	public void dismissTimeSheetAlert() {
 		gu.dismissAlert(driver);
 	}
-	
+
 	public void performLogout(WebDriver driver) {
 		userDropdown.click();
 		wu.waitElementClickable(driver, logoutBtn);

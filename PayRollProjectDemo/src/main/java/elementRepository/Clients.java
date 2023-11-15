@@ -1,6 +1,8 @@
 package elementRepository;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,18 +20,18 @@ public class Clients {
 	WaitUtilities wu = new WaitUtilities();
 	ExcelUtilities eu = new ExcelUtilities();
 	static String inputClientName;
-	static int inputClientId;
-	static int inputRefNo;
-	static int inputInvoiceContract;
+	static String inputClientId;
+	static String inputRefNo;
+	static String inputInvoiceContract;
 	static String inputDeliveryDropdown;
 	static String inputPhoneNo;
 	static String inputClientAddress;
-	static int inputFax;
-	static int inputSettlementDays;
+	static String inputFax;
+	static String inputSettlementDays;
 	static String inputEmail;
 	static String inputVatRateDropdown;
 	static String inputPostCode;
-	static int inputCompanyReg;
+	static String inputCompanyReg;
 	static String inputInvoiceOrderDropdown;
 
 	public Clients(WebDriver driver) {
@@ -100,7 +102,8 @@ public class Clients {
 
 	public String getClientName(String fileName, String sheetName) {
 		try {
-			inputClientName = eu.getStringData(fileName, sheetName, 0, 1);
+			List<String> list = eu.getDataFromExcel(fileName, sheetName);
+			inputClientName = list.get(1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,12 +113,13 @@ public class Clients {
 
 	public String getClientId(String fileName, String sheetName) {
 		try {
-			inputClientId = eu.getIntegerData(fileName, sheetName, 1, 1);
+			List<String> list = eu.getDataFromExcel(fileName, sheetName);
+			inputClientId = list.get(3);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return String.valueOf(inputClientId);
+		return inputClientId;
 	}
 
 	public void enterClientId(String clientId) {
@@ -133,20 +137,21 @@ public class Clients {
 
 	public void getClientDetailsFromExcel(String fileName, String sheetName) {
 		try {
-			inputClientName = eu.getStringData(fileName, sheetName, 0, 1);
-			inputClientId = eu.getIntegerData(fileName, sheetName, 1, 1);
-			inputRefNo = eu.getIntegerData(fileName, sheetName, 2, 1);
-			inputInvoiceContract = eu.getIntegerData(fileName, sheetName, 3, 1);
-			inputDeliveryDropdown = eu.getStringData(fileName, sheetName, 4, 1);
-			inputPhoneNo = eu.getStringData(fileName, sheetName, 5, 1);
-			inputClientAddress = eu.getStringData(fileName, sheetName, 6, 1);
-			inputFax = eu.getIntegerData(fileName, sheetName, 7, 1);
-			inputSettlementDays = eu.getIntegerData(fileName, sheetName, 8, 1);
-			inputEmail = eu.getStringData(fileName, sheetName, 9, 1);
-			inputVatRateDropdown = eu.getStringData(fileName, sheetName, 10, 1);
-			inputPostCode = eu.getStringData(fileName, sheetName, 11, 1);
-			inputCompanyReg = eu.getIntegerData(fileName, sheetName, 12, 1);
-			inputInvoiceOrderDropdown = eu.getStringData(fileName, sheetName, 13, 1);
+			List<String> list = eu.getDataFromExcel(fileName, sheetName);
+			inputClientName = list.get(1);
+			inputClientId = list.get(3);
+			inputRefNo = list.get(5);
+			inputInvoiceContract = list.get(7);
+			inputDeliveryDropdown = list.get(9);
+			inputPhoneNo = list.get(11);
+			inputClientAddress = list.get(13);
+			inputFax = list.get(15);
+			inputSettlementDays = list.get(17);
+			inputEmail = list.get(19);
+			inputVatRateDropdown = list.get(21);
+			inputPostCode = list.get(23);
+			inputCompanyReg = list.get(25);
+			inputInvoiceOrderDropdown = list.get(27);
 		} catch (Exception e) {
 			System.out.println("An Exception Occurred!!!" + e);
 		}

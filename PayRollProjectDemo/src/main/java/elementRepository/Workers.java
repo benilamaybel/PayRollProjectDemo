@@ -1,6 +1,7 @@
 package elementRepository;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -101,7 +102,8 @@ public class Workers {
 	public String getSearchStringFromExcel(String excelFileName, String sheetName) {
 		String SearchString = "";
 		try {
-			SearchString = eu.getStringData(excelFileName, sheetName, 1, 1);
+			List<String> excelInputList = eu.getDataFromExcel(excelFileName, sheetName);
+			SearchString = excelInputList.get(3);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,7 +114,8 @@ public class Workers {
 	public String getWorkerNameFromExcel(String excelFileName, String sheetName) {
 		String workerName = "";
 		try {
-			workerName = eu.getStringData(excelFileName, sheetName, 0, 1);
+			List<String> excelInputList = eu.getDataFromExcel(excelFileName, sheetName);
+			workerName = excelInputList.get(1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,7 +126,8 @@ public class Workers {
 	public String getSetDateFromExcel(String excelFileName, String sheetName) {
 		String setDate = "";
 		try {
-			setDate = eu.getStringData(excelFileName, sheetName, 2, 1);
+			List<String> excelInputList = eu.getDataFromExcel(excelFileName, sheetName);
+			setDate = excelInputList.get(5);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
