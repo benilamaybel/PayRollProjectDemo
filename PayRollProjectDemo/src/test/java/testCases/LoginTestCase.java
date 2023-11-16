@@ -11,16 +11,16 @@ import elementRepository.Dashboard;
 import elementRepository.LoginPage;
 
 public class LoginTestCase extends BaseClass {
-	LoginPage lp;
-	Dashboard d;
+	LoginPage loginpage;
+	Dashboard dashboard;
 
 	@Test(groups = "Smoke", priority = 1)
 	public void verifyValidLogin() throws IOException {
-		lp = new LoginPage(driver);
-		d = new Dashboard(driver);
-		lp.performloginUsingExcelInput(inputExcelFileName, loginSheetName);
+		loginpage = new LoginPage(driver);
+		dashboard = new Dashboard(driver);
+		loginpage.performloginUsingExcelInput(inputExcelFileName, loginSheetName);
 		String ExpectedText = "Welcome to Payroll Application";
-		String ActualText = d.verifyDashboardText();
+		String ActualText = dashboard.verifyDashboardText();
 		Assert.assertEquals(ActualText, ExpectedText, Constant.lp_verifyValidLogin);
 	}
 
@@ -31,10 +31,10 @@ public class LoginTestCase extends BaseClass {
 
 	@Test(dataProvider = "validInvalidTestData", groups = "Regression", priority = 1)
 	public void verifyInValidLogin(String userName, String passWord) {
-		lp = new LoginPage(driver);
-		lp.performlogin(userName, passWord);
+		loginpage = new LoginPage(driver);
+		loginpage.performlogin(userName, passWord);
 		String ExpectedText = "Incorrect username or password.";
-		String ActualText = lp.getValidationError();
+		String ActualText = loginpage.getValidationError();
 		Assert.assertEquals(ActualText, ExpectedText, Constant.lp_verifyInValidLogin);
 	}
 }

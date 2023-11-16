@@ -9,7 +9,7 @@ import utilities.GeneralUtilities;
 
 public class Dashboard {
 	WebDriver driver;
-	GeneralUtilities gu = new GeneralUtilities();;
+	GeneralUtilities generalutility = new GeneralUtilities();;
 
 	public Dashboard(WebDriver driver) {
 		this.driver = driver;
@@ -20,6 +20,6 @@ public class Dashboard {
 	WebElement dashboardText;
 
 	public String verifyDashboardText() {
-		return gu.getElementText(dashboardText);
+		return generalutility.getElementText(dashboardText);
 	}
 }

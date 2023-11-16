@@ -14,9 +14,9 @@ import utilities.WaitUtilities;
 
 public class Workers {
 	WebDriver driver;
-	GeneralUtilities gu = new GeneralUtilities();;
-	WaitUtilities wu = new WaitUtilities();;
-	ExcelUtilities eu = new ExcelUtilities();
+	GeneralUtilities generalutility = new GeneralUtilities();;
+	WaitUtilities waitutility = new WaitUtilities();;
+	ExcelUtilities excelutility = new ExcelUtilities();
 
 	public Workers(WebDriver driver) {
 		this.driver = driver;
@@ -41,7 +41,7 @@ public class Workers {
 	WebElement firstDeleteItem;
 
 	public int searchWorker(WebDriver driver, String workerName) {
-		return gu.findTableElement(driver, workerName);
+		return generalutility.findTableElement(driver, workerName);
 	}
 
 	public void navigateToWorkersMenu() {
@@ -49,7 +49,7 @@ public class Workers {
 	}
 
 	public void enterWorkerName(String workerName) {
-		gu.enterText(workerNameElement, workerName);
+		generalutility.enterText(workerNameElement, workerName);
 	}
 
 	public void clickSearch() {
@@ -65,11 +65,11 @@ public class Workers {
 	}
 
 	public void clearBankStartDate() {
-		gu.clearField(bankStartDate);
+		generalutility.clearField(bankStartDate);
 	}
 
 	public void enterBankStartDate(String setDate) {
-		gu.enterText(bankStartDate, setDate);
+		generalutility.enterText(bankStartDate, setDate);
 	}
 
 	public void saveWorker() {
@@ -77,15 +77,15 @@ public class Workers {
 	}
 
 	public void clickOnEditWorker(WebElement editElement) {
-		gu.scrollDown(driver);
-		wu.fluentWaitElementClickable(driver, editElement);
+		generalutility.scrollDown(driver);
+		waitutility.fluentWaitElementClickable(driver, editElement);
 		editElement.click();
 	}
 
 	public String verifyPageTitle(WebDriver driver, String expectedText) {
 		String actualTitleText = "";
 		try {
-			wu.waitTextDisplayed(driver, title, expectedText);
+			waitutility.waitTextDisplayed(driver, title, expectedText);
 			actualTitleText = title.getText();
 		} catch (Exception e) {
 			actualTitleText = title.getText();
@@ -102,7 +102,7 @@ public class Workers {
 	public String getSearchStringFromExcel(String excelFileName, String sheetName) {
 		String SearchString = "";
 		try {
-			List<String> excelInputList = eu.getDataFromExcel(excelFileName, sheetName);
+			List<String> excelInputList = excelutility.getDataFromExcel(excelFileName, sheetName);
 			SearchString = excelInputList.get(3);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -114,7 +114,7 @@ public class Workers {
 	public String getWorkerNameFromExcel(String excelFileName, String sheetName) {
 		String workerName = "";
 		try {
-			List<String> excelInputList = eu.getDataFromExcel(excelFileName, sheetName);
+			List<String> excelInputList = excelutility.getDataFromExcel(excelFileName, sheetName);
 			workerName = excelInputList.get(1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -126,7 +126,7 @@ public class Workers {
 	public String getSetDateFromExcel(String excelFileName, String sheetName) {
 		String setDate = "";
 		try {
-			List<String> excelInputList = eu.getDataFromExcel(excelFileName, sheetName);
+			List<String> excelInputList = excelutility.getDataFromExcel(excelFileName, sheetName);
 			setDate = excelInputList.get(5);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -137,7 +137,7 @@ public class Workers {
 
 	public String verifyDeleteFirstRecord() {
 		firstDeleteItem.click();
-		wu.waitAlertDisplayed(driver);
-		return gu.getAlertText(driver);
+		waitutility.waitAlertDisplayed(driver);
+		return generalutility.getAlertText(driver);
 	}
 }

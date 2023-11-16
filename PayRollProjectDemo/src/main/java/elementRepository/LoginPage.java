@@ -13,8 +13,8 @@ import utilities.GeneralUtilities;
 
 public class LoginPage {
 	WebDriver driver;
-	GeneralUtilities gu = new GeneralUtilities();
-	ExcelUtilities eu = new ExcelUtilities();
+	GeneralUtilities generalutility = new GeneralUtilities();
+	ExcelUtilities excelutility = new ExcelUtilities();
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -36,7 +36,7 @@ public class LoginPage {
 		String[] userCredentials = new String[2];
 		try {
 			List<String> excelInputList;
-			excelInputList = eu.getDataFromExcel(fileName, sheetName);
+			excelInputList = excelutility.getDataFromExcel(fileName, sheetName);
 			userCredentials[0] = excelInputList.get(2);
 			userCredentials[1] = excelInputList.get(3);
 
@@ -61,11 +61,11 @@ public class LoginPage {
 	}
 
 	public String getValidationError() {
-		return gu.getElementText(validationError);
+		return generalutility.getElementText(validationError);
 	}
 
 	public String getLoginPageText() {
-		return gu.getElementText(loginPageText);
+		return generalutility.getElementText(loginPageText);
 	}
 
 }

@@ -56,12 +56,6 @@ public class BaseClass {
 					System.getProperty("user.dir") + "\\src\\main\\resources\\Driver\\msedgedriver.exe");
 			driver = new EdgeDriver();
 		}
-		/*
-		 * System.setProperty(pro.getProperty("ChromeDriver"),
-		 * System.getProperty("user.dir") +
-		 * "\\src\\main\\resources\\Driver\\chromedriver.exe"); driver = new
-		 * ChromeDriver();
-		 */
 		driver.get(pro.getProperty("BaseURL"));
 		inputExcelFileName = pro.getProperty("ExcelFileName");
 		loginSheetName = pro.getProperty("LoginSheetName");

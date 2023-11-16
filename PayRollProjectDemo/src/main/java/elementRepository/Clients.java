@@ -16,9 +16,9 @@ import utilities.WaitUtilities;
 public class Clients {
 
 	WebDriver driver;
-	GeneralUtilities gu = new GeneralUtilities();
-	WaitUtilities wu = new WaitUtilities();
-	ExcelUtilities eu = new ExcelUtilities();
+	GeneralUtilities generalutility = new GeneralUtilities();
+	WaitUtilities waitutility = new WaitUtilities();
+	ExcelUtilities excelutility = new ExcelUtilities();
 	static String inputClientName;
 	static String inputClientId;
 	static String inputRefNo;
@@ -102,7 +102,7 @@ public class Clients {
 
 	public String getClientName(String fileName, String sheetName) {
 		try {
-			List<String> list = eu.getDataFromExcel(fileName, sheetName);
+			List<String> list = excelutility.getDataFromExcel(fileName, sheetName);
 			inputClientName = list.get(1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -113,7 +113,7 @@ public class Clients {
 
 	public String getClientId(String fileName, String sheetName) {
 		try {
-			List<String> list = eu.getDataFromExcel(fileName, sheetName);
+			List<String> list = excelutility.getDataFromExcel(fileName, sheetName);
 			inputClientId = list.get(3);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -131,13 +131,13 @@ public class Clients {
 	}
 
 	public String generateClientName(String clientName) {
-		String generatedClientName = clientName + gu.generateCurrentDateAndTime();
+		String generatedClientName = clientName + generalutility.generateCurrentDateAndTime();
 		return generatedClientName;
 	}
 
 	public void getClientDetailsFromExcel(String fileName, String sheetName) {
 		try {
-			List<String> list = eu.getDataFromExcel(fileName, sheetName);
+			List<String> list = excelutility.getDataFromExcel(fileName, sheetName);
 			inputClientName = list.get(1);
 			inputClientId = list.get(3);
 			inputRefNo = list.get(5);
@@ -159,26 +159,26 @@ public class Clients {
 	}
 
 	public String enterClientDetails() {
-		gu.selectDropdownByIndex(branchDropdown, 1);
-		gu.enterText(refNo, String.valueOf(inputRefNo)); // Convert int to String and pass it to enterText Function
-		gu.selectDropdownByValue(invoiceOrderDropdown, inputInvoiceOrderDropdown);
-		gu.selectDropdownByIndex(divisionDropdown, 1);
-		gu.enterText(invoiceContract, String.valueOf(inputInvoiceContract));
-		gu.selectDropdownByVisibleText(deliveryDropdown, inputDeliveryDropdown);
+		generalutility.selectDropdownByIndex(branchDropdown, 1);
+		generalutility.enterText(refNo, String.valueOf(inputRefNo)); // Convert int to String and pass it to enterText Function
+		generalutility.selectDropdownByValue(invoiceOrderDropdown, inputInvoiceOrderDropdown);
+		generalutility.selectDropdownByIndex(divisionDropdown, 1);
+		generalutility.enterText(invoiceContract, String.valueOf(inputInvoiceContract));
+		generalutility.selectDropdownByVisibleText(deliveryDropdown, inputDeliveryDropdown);
 		String generatedClientName = generateClientName(inputClientName);
-		gu.enterText(clientName, generatedClientName);
-		gu.enterText(phoneNo, inputPhoneNo);
-		gu.selectDropdownByIndex(masterDocumentDropdown, 1);
-		gu.enterText(clientAddress, inputClientAddress);
-		gu.enterText(fax, String.valueOf(inputFax));
-		gu.enterText(settlementDays, String.valueOf(inputSettlementDays));
-		gu.scrollDown(driver);
-		gu.enterText(email, inputEmail);
-		gu.selectDropdownByValue(vatrateDropdown, inputVatRateDropdown);
-		gu.enterText(postCode, inputPostCode);
-		gu.enterText(companyReg, String.valueOf(inputCompanyReg));
-		wu = new WaitUtilities();
-		wu.waitElementClickable(driver, directClient);
+		generalutility.enterText(clientName, generatedClientName);
+		generalutility.enterText(phoneNo, inputPhoneNo);
+		generalutility.selectDropdownByIndex(masterDocumentDropdown, 1);
+		generalutility.enterText(clientAddress, inputClientAddress);
+		generalutility.enterText(fax, String.valueOf(inputFax));
+		generalutility.enterText(settlementDays, String.valueOf(inputSettlementDays));
+		generalutility.scrollDown(driver);
+		generalutility.enterText(email, inputEmail);
+		generalutility.selectDropdownByValue(vatrateDropdown, inputVatRateDropdown);
+		generalutility.enterText(postCode, inputPostCode);
+		generalutility.enterText(companyReg, String.valueOf(inputCompanyReg));
+		waitutility = new WaitUtilities();
+		waitutility.waitElementClickable(driver, directClient);
 		directClient.click();
 		return generatedClientName;
 	}
@@ -188,22 +188,22 @@ public class Clients {
 	}
 
 	public String getSavedClientName(WebDriver driver, String generatedClientName) {
-		wu.waitTextDisplayed(driver, savedClient, generatedClientName);
-		String actualClientName = gu.getElementText(savedClient);
+		waitutility.waitTextDisplayed(driver, savedClient, generatedClientName);
+		String actualClientName = generalutility.getElementText(savedClient);
 		return actualClientName;
 	}
 
 	public int searchClientData(WebDriver driver, String searchElement) {
-		return gu.findTableElement(driver, searchElement);
+		return generalutility.findTableElement(driver, searchElement);
 	}
 
 	public void navigateToViewClient(WebDriver driver, WebElement element) {
-		wu.waitElementClickable(driver, element);
+		waitutility.waitElementClickable(driver, element);
 		element.click();
 	}
 
 	public String getViewPageTitle(WebDriver driver, String clientName) {
-		wu.waitTextDisplayed(driver, savedClient, clientName);
+		waitutility.waitTextDisplayed(driver, savedClient, clientName);
 		String titleClientName = savedClient.getText();
 		return titleClientName;
 	}

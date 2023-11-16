@@ -78,8 +78,6 @@ public class GeneralUtilities {
 	}
 
 	public void clickElement(WebDriver driver, WebElement element) {
-		// WebElement elementToClick = driver.findElement(By.id("elementId"));
-
 		// Create a JavaScriptExecutor instance
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
@@ -147,7 +145,6 @@ public class GeneralUtilities {
 			j = -1; // Set j = -1 if No results found. This can be verified in Testcases using a
 					// condition check
 		}
-		// }
 		return j;
 	}
 
