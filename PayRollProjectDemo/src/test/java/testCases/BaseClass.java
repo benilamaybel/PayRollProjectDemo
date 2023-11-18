@@ -8,15 +8,14 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-//import utilities.ITestResult;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
 import org.testng.annotations.Parameters;
 
-import elementRepository.LoginPage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import utilities.ScreenShotCapture;
+import utilities.WaitUtilities;
 
 public class BaseClass {
 	WebDriver driver;
@@ -27,6 +26,8 @@ public class BaseClass {
 	static String clientSheetName;
 	static String workerSheetName;
 	static String timeSheetName;
+	public static String excelFilePath;
+	public static String imageFilePath;
 
 	public static void testBasic() throws IOException {
 
@@ -48,22 +49,32 @@ public class BaseClass {
 		}
 
 		if (browserName.equals("chrome")) {
-			System.setProperty(pro.getProperty("ChromeDriver"),
-					System.getProperty("user.dir") + "\\src\\main\\resources\\Driver\\chromedriver.exe");
+			/*
+			 * System.setProperty(pro.getProperty("ChromeDriver"),
+			 * System.getProperty("user.dir") +
+			 * "\\src\\main\\resources\\Driver\\chromedriver.exe");
+			 */
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		} else if (browserName.equals("edge")) {
-			System.setProperty(pro.getProperty("EdgeDriver"),
-					System.getProperty("user.dir") + "\\src\\main\\resources\\Driver\\msedgedriver.exe");
+			/*
+			 * System.setProperty(pro.getProperty("EdgeDriver"),
+			 * System.getProperty("user.dir") +
+			 * "\\src\\main\\resources\\Driver\\msedgedriver.exe");
+			 */
+			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
 		driver.get(pro.getProperty("BaseURL"));
+		excelFilePath = pro.getProperty("ExcelFilePath");
+		imageFilePath =  pro.getProperty("ImageFilePath");
 		inputExcelFileName = pro.getProperty("ExcelFileName");
 		loginSheetName = pro.getProperty("LoginSheetName");
 		clientSheetName = pro.getProperty("ClientSheetName");
 		workerSheetName = pro.getProperty("WorkerSheetName");
 		timeSheetName = pro.getProperty("TimeSheetName");
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WaitUtilities.implicitWait));
 	}
 
 	@AfterMethod(alwaysRun = true) // to run always

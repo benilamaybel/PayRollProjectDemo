@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import constant.Constant;
 import elementRepository.LoginPage;
 import elementRepository.TimeSheet;
-import utilities.GeneralUtilities;
 
 public class DashBoardTestCases extends BaseClass {
 	TimeSheet timesheet;

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import testCases.BaseClass;
 import utilities.ExcelUtilities;
 import utilities.GeneralUtilities;
 import utilities.WaitUtilities;
@@ -104,7 +105,7 @@ public class TimeSheet {
 	
 
 	public void uploadTimeSheet(String fileName) {
-		generalutility.uploadFile(browseFile, System.getProperty("user.dir") + "\\src\\main\\resources\\Image\\" + fileName);
+		generalutility.uploadFile(browseFile, System.getProperty("user.dir") + BaseClass.imageFilePath + fileName);
 	}
 
 	public String getFileUploaded() {

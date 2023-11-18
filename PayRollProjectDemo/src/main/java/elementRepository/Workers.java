@@ -3,6 +3,7 @@ package elementRepository;
 import java.io.IOException;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,8 +41,20 @@ public class Workers {
 	@FindBy(xpath = "//table//tbody//tr[1]//td[8]//a[@aria-label='Delete']")
 	WebElement firstDeleteItem;
 
-	public int searchWorker(WebDriver driver, String workerName) {
-		return generalutility.findTableElement(driver, workerName);
+	public boolean editWorker(WebDriver driver, String workerName) {
+		boolean elementFound = false;
+		int elementIndex = generalutility.findTableElement(driver, workerName);
+		if (elementIndex >= 0) { // edit details only when element is present/found in search result list
+			String locatorEdit = "//table[@class='table table-striped table-bordered']//tbody//tr[" + (elementIndex + 1)
+					+ "]//td[8]//span[@class='glyphicon glyphicon-pencil']";
+			WebElement editElement = driver.findElement(By.xpath(locatorEdit));
+			clickOnEditWorker(editElement);
+			elementFound = true;
+		} else {
+			elementFound = false;
+		}
+		
+		return elementFound;
 	}
 
 	public void navigateToWorkersMenu() {

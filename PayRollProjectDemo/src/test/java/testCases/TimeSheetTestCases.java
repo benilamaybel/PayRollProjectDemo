@@ -1,13 +1,11 @@
 package testCases;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import constant.Constant;
 import elementRepository.LoginPage;
 import elementRepository.TimeSheet;
-import utilities.GeneralUtilities;
 
 public class TimeSheetTestCases extends BaseClass {
 	TimeSheet timesheet;

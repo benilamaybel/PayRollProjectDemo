@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import testCases.BaseClass;
+
 
 public class ExcelUtilities {
 	static FileInputStream f;
@@ -37,7 +38,7 @@ public class ExcelUtilities {
 	}
 */
 	public List<String> getDataFromExcel(String fileName, String sheetName) throws IOException {
-		f = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\resources\\Excel\\" + fileName);
+		f = new FileInputStream(System.getProperty("user.dir") + BaseClass.excelFilePath + fileName);
 		XSSFWorkbook wb = new XSSFWorkbook(f);
 		XSSFSheet sheet = wb.getSheet(sheetName);
 		Iterator<Row> itr = sheet.iterator();

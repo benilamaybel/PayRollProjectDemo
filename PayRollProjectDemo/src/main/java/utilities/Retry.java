@@ -1,9 +1,9 @@
 package utilities;
 
-import org.testng.IRetryAnalyzer;
-import org.testng.ITestResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
 
 public class Retry implements IRetryAnalyzer {
 
