@@ -53,7 +53,7 @@ public class Workers {
 		} else {
 			elementFound = false;
 		}
-		
+
 		return elementFound;
 	}
 
@@ -112,10 +112,10 @@ public class Workers {
 		return date;
 	}
 
-	public String getSearchStringFromExcel(String excelFileName, String sheetName) {
+	public String getSearchStringFromExcel(String filePath, String excelFileName, String sheetName) {
 		String SearchString = "";
 		try {
-			List<String> excelInputList = excelutility.getDataFromExcel(excelFileName, sheetName);
+			List<String> excelInputList = excelutility.getDataFromExcel(filePath, excelFileName, sheetName);
 			SearchString = excelInputList.get(3);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -124,10 +124,10 @@ public class Workers {
 		return SearchString;
 	}
 
-	public String getWorkerNameFromExcel(String excelFileName, String sheetName) {
+	public String getWorkerNameFromExcel(String filePath, String excelFileName, String sheetName) {
 		String workerName = "";
 		try {
-			List<String> excelInputList = excelutility.getDataFromExcel(excelFileName, sheetName);
+			List<String> excelInputList = excelutility.getDataFromExcel(filePath, excelFileName, sheetName);
 			workerName = excelInputList.get(1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -136,10 +136,10 @@ public class Workers {
 		return workerName;
 	}
 
-	public String getSetDateFromExcel(String excelFileName, String sheetName) {
+	public String getSetDateFromExcel(String filePath, String excelFileName, String sheetName) {
 		String setDate = "";
 		try {
-			List<String> excelInputList = excelutility.getDataFromExcel(excelFileName, sheetName);
+			List<String> excelInputList = excelutility.getDataFromExcel(filePath, excelFileName, sheetName);
 			setDate = excelInputList.get(5);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -31,11 +31,11 @@ public class LoginPage {
 	@FindBy(xpath = "//div[@class='col-sm-4 form-area inner']//h1")
 	WebElement loginPageText;
 
-	public String[] getUserDetailsFromExcel(String fileName, String sheetName) {
+	public String[] getUserDetailsFromExcel(String filePath, String fileName, String sheetName) {
 		String[] userCredentials = new String[2];
 		try {
 			List<String> excelInputList;
-			excelInputList = excelutility.getDataFromExcel(fileName, sheetName);
+			excelInputList = excelutility.getDataFromExcel(filePath, fileName, sheetName);
 			userCredentials[0] = excelInputList.get(2);
 			userCredentials[1] = excelInputList.get(3);
 
@@ -51,9 +51,9 @@ public class LoginPage {
 		loginBtn.click();
 	}
 
-	public void performloginUsingExcelInput(String fileName, String sheetName) {
-		String[] userData = getUserDetailsFromExcel(fileName, sheetName); // calling another function
-																			// getUserDetailsFromExcel()
+	public void performloginUsingExcelInput(String filePath, String fileName, String sheetName) {
+		String[] userData = getUserDetailsFromExcel(filePath, fileName, sheetName); // calling another function
+		// getUserDetailsFromExcel()
 		String userName = userData[0];
 		String passWord = userData[1];
 		performlogin(userName, passWord);

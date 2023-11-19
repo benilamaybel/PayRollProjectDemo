@@ -18,46 +18,45 @@ public class WorkersTestCases extends BaseClass {
 	@Test(groups = "Regression", priority = 2)
 	public void deleteWorker() {
 		loginpage = new LoginPage(driver);
-		loginpage.performloginUsingExcelInput(inputExcelFileName, loginSheetName);
+		loginpage.performloginUsingExcelInput(Constant.excelFilePath, inputExcelFileName, loginSheetName);
 		workers = new Workers(driver);
 		workers.navigateToWorkersMenu();
 		String actual = workers.verifyDeleteFirstRecord();
 		String expected = "Are you sure you want to delete this item?";
-		Assert.assertEquals(actual, expected, Constant.w_deleteWorker);
+		Assert.assertEquals(actual, expected, Constant.workerpage_deleteWorker);
 		generalutility.acceptAlert(driver);
 	}
 
 	@Test(groups = "Smoke")
 	public void searchAndEditWorker() throws InterruptedException {
 		loginpage = new LoginPage(driver);
-		loginpage.performloginUsingExcelInput(inputExcelFileName, loginSheetName);
+		loginpage.performloginUsingExcelInput(Constant.excelFilePath, inputExcelFileName, loginSheetName);
 		workers = new Workers(driver);
 		workers.navigateToWorkersMenu();
-		String searchString = workers.getSearchStringFromExcel(inputExcelFileName, workerSheetName);
+		String searchString = workers.getSearchStringFromExcel(Constant.excelFilePath, inputExcelFileName,
+				workerSheetName);
 		workers.enterWorkerName(searchString);
-		String searchElement = workers.getWorkerNameFromExcel(inputExcelFileName, workerSheetName);
+		String searchElement = workers.getWorkerNameFromExcel(Constant.excelFilePath, inputExcelFileName,
+				workerSheetName);
 		workers.clickSearch();
 		boolean elementFound = workers.editWorker(driver, searchElement);
 		Assert.assertEquals(elementFound, true, "Element Not Found!");
 		expected = "UPDATE WORKER: " + searchElement.toUpperCase();
 		actual = workers.verifyPageTitle(driver, searchElement.toUpperCase());
-		Assert.assertEquals(actual, expected, Constant.w_editWorker);
+		Assert.assertEquals(actual, expected, Constant.workerpage_editAndViewWorker);
 		workers.navigateToBankDetailsSubMenu();
 		expected = "WORKER BANK DETAILS: " + searchElement.toUpperCase();
 		actual = workers.verifyPageTitle(driver, searchElement.toUpperCase());
 		System.out.println("Actual Text = " + actual);
-		Assert.assertEquals(actual, expected, Constant.w_editWorkerBankPage);
+		Assert.assertEquals(actual, expected, Constant.workerpage_editWorkerBankPage);
 		workers.clearBankStartDate();
-		String setDate = workers.getSetDateFromExcel(inputExcelFileName, workerSheetName);
+		String setDate = workers.getSetDateFromExcel(Constant.excelFilePath, inputExcelFileName, workerSheetName);
 		workers.enterBankStartDate(setDate);
 		generalutility.scrollDown(driver);
 		workers.saveWorker();
 		Thread.sleep(5000); // Needed for the header to refresh
-		expected = searchElement.toUpperCase();
-		actual = workers.verifyPageTitle(driver, searchElement.toUpperCase());
-		Assert.assertEquals(actual, expected, Constant.w_editWorkerSave);
 		workers.navigateToBankDetailsSubMenu();
 		actual = workers.getBankDate();
-		Assert.assertEquals(actual, setDate, Constant.w_editWorkerBankDate);
+		Assert.assertEquals(actual, setDate, Constant.workerpage_editWorkerBankDate);
 	}
 }

@@ -18,10 +18,10 @@ public class LoginTestCase extends BaseClass {
 	public void verifyValidLogin() throws IOException {
 		loginpage = new LoginPage(driver);
 		dashboard = new Dashboard(driver);
-		loginpage.performloginUsingExcelInput(inputExcelFileName, loginSheetName);
+		loginpage.performloginUsingExcelInput(Constant.excelFilePath,inputExcelFileName, loginSheetName);
 		String ExpectedText = "Welcome to Payroll Application";
 		String ActualText = dashboard.verifyDashboardText();
-		Assert.assertEquals(ActualText, ExpectedText, Constant.lp_verifyValidLogin);
+		Assert.assertEquals(ActualText, ExpectedText, Constant.loginpage_verifyValidLogin);
 	}
 
 	@DataProvider(name = "validInvalidTestData")
@@ -35,6 +35,6 @@ public class LoginTestCase extends BaseClass {
 		loginpage.performlogin(userName, passWord);
 		String ExpectedText = "Incorrect username or password.";
 		String ActualText = loginpage.getValidationError();
-		Assert.assertEquals(ActualText, ExpectedText, Constant.lp_verifyInValidLogin);
+		Assert.assertEquals(ActualText, ExpectedText, Constant.loginpage_verifyInValidLogin);
 	}
 }

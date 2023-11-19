@@ -66,8 +66,6 @@ public class BaseClass {
 			driver = new EdgeDriver();
 		}
 		driver.get(pro.getProperty("BaseURL"));
-		excelFilePath = pro.getProperty("ExcelFilePath");
-		imageFilePath =  pro.getProperty("ImageFilePath");
 		inputExcelFileName = pro.getProperty("ExcelFileName");
 		loginSheetName = pro.getProperty("LoginSheetName");
 		clientSheetName = pro.getProperty("ClientSheetName");

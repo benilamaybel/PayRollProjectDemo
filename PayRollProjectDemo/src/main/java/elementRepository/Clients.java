@@ -3,6 +3,7 @@ package elementRepository;
 import java.io.IOException;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -99,9 +100,9 @@ public class Clients {
 		searchClientName.sendKeys(text);
 	}
 
-	public String getClientName(String fileName, String sheetName) {
+	public String getClientName(String filePath, String fileName, String sheetName) {
 		try {
-			List<String> list = excelutility.getDataFromExcel(fileName, sheetName);
+			List<String> list = excelutility.getDataFromExcel(filePath, fileName, sheetName);
 			inputClientName = list.get(1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -110,9 +111,9 @@ public class Clients {
 		return inputClientName;
 	}
 
-	public String getClientId(String fileName, String sheetName) {
+	public String getClientId(String filePath, String fileName, String sheetName) {
 		try {
-			List<String> list = excelutility.getDataFromExcel(fileName, sheetName);
+			List<String> list = excelutility.getDataFromExcel(filePath, fileName, sheetName);
 			inputClientId = list.get(3);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -134,9 +135,9 @@ public class Clients {
 		return generatedClientName;
 	}
 
-	public void getClientDetailsFromExcel(String fileName, String sheetName) {
+	public void getClientDetailsFromExcel(String filePath, String fileName, String sheetName) {
 		try {
-			List<String> list = excelutility.getDataFromExcel(fileName, sheetName);
+			List<String> list = excelutility.getDataFromExcel(filePath, fileName, sheetName);
 			inputClientName = list.get(1);
 			inputClientId = list.get(3);
 			inputRefNo = list.get(5);
@@ -159,7 +160,8 @@ public class Clients {
 
 	public String enterClientDetails() {
 		generalutility.selectDropdownByIndex(branchDropdown, 1);
-		generalutility.enterText(refNo, String.valueOf(inputRefNo)); // Convert int to String and pass it to enterText Function
+		generalutility.enterText(refNo, String.valueOf(inputRefNo)); // Convert int to String and pass it to enterText
+																		// Function
 		generalutility.selectDropdownByValue(invoiceOrderDropdown, inputInvoiceOrderDropdown);
 		generalutility.selectDropdownByIndex(divisionDropdown, 1);
 		generalutility.enterText(invoiceContract, String.valueOf(inputInvoiceContract));
@@ -192,8 +194,17 @@ public class Clients {
 		return actualClientName;
 	}
 
-	public int searchClientData(WebDriver driver, String searchElement) {
-		return generalutility.findTableElement(driver, searchElement);
+	public boolean searchAndEditClientData(WebDriver driver, String searchElement) {
+		boolean elementFound = false;
+		int elementIndex = generalutility.findTableElement(driver, searchElement);
+		if (elementIndex >= 0) { // view details only when element is present/found in search result list
+			String locatorEye = "//table[@class='table table-striped table-bordered']//tbody//tr[" + (elementIndex + 1)
+					+ "]//td[6]//span[@class='glyphicon glyphicon-eye-open']";
+			WebElement eyeElement = driver.findElement(By.xpath(locatorEye));
+			navigateToViewClient(driver, eyeElement);
+			elementFound = true;
+		}
+		return elementFound;
 	}
 
 	public void navigateToViewClient(WebDriver driver, WebElement element) {

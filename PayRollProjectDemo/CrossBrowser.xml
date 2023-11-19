@@ -1,7 +1,7 @@
 <suite name="PayrollProject" parallel="tests" thread-count="2">
 	<listeners>
-		<listener class-name="utilities.RetryListener" />
-		<listener class-name="utilities.ExtenetReport" />
+<!--		<listener class-name="utilities.RetryListener" />
+		<listener class-name="utilities.ExtenetReport" /> -->
 	</listeners>
 	<test name="ChromeTest">
 		<parameter name="browser" value="chrome"></parameter>
@@ -12,9 +12,9 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="testCases.LoginTestCase"></class> 
-		<!--	<class name="testCases.ClientTestCases"></class>
-			<class name="testCases.WorkersTestCases"></class>
+		<!--	<class name="testCases.LoginTestCase"></class> -->
+			<class name="testCases.ClientTestCases"></class>
+			<!--<class name="testCases.WorkersTestCases"></class>
 			<class name="testCases.TimeSheetTestCases"></class>
 			<class name="testCases.DashBoardTestCases"></class> -->
 		</classes>

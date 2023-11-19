@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitUtilities {
 	public static int implicitWait = 5;
+
 	public void waitElementClickable(WebDriver driver, WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -45,6 +46,7 @@ public class WaitUtilities {
 				.pollingEvery(Duration.ofSeconds(2)).ignoring(NoSuchElementException.class);
 		fluentWait.until(ExpectedConditions.elementToBeClickable(element));
 	}
+
 	public void fluentWaitForVisibility(WebDriver driver, WebElement element) {
 		FluentWait<WebDriver> fluentWait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(30))
 				.pollingEvery(Duration.ofSeconds(2)).ignoring(NoSuchElementException.class);

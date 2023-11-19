@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import testCases.BaseClass;
+//import testCases.BaseClass;
 import utilities.ExcelUtilities;
 import utilities.GeneralUtilities;
 import utilities.WaitUtilities;
@@ -102,10 +102,10 @@ public class TimeSheet {
 		createTimeSheetBtn.click();
 	}
 
-	
-
-	public void uploadTimeSheet(String fileName) {
-		generalutility.uploadFile(browseFile, System.getProperty("user.dir") + BaseClass.imageFilePath + fileName);
+	public void uploadTimeSheet(String filePath, String fileName) {
+		// generalutility.uploadFile(browseFile, System.getProperty("user.dir") +
+		// BaseClass.imageFilePath + fileName);
+		generalutility.uploadFile(browseFile, System.getProperty("user.dir") + filePath + fileName);
 	}
 
 	public String getFileUploaded() {
@@ -117,9 +117,9 @@ public class TimeSheet {
 		uploadBtn.click();
 	}
 
-	public void getTimeSheetDataFromExcel(String excelFileName, String sheetName) {
+	public void getTimeSheetDataFromExcel(String filePath, String excelFileName, String sheetName) {
 		try {
-			List<String> excelInputList = excelutility.getDataFromExcel(excelFileName, sheetName);
+			List<String> excelInputList = excelutility.getDataFromExcel(filePath, excelFileName, sheetName);
 			inputTimeSheetNo = excelInputList.get(1);
 			inputSearchClientString = excelInputList.get(3);
 			inputClientValue = excelInputList.get(5);
