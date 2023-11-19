@@ -12,11 +12,11 @@
 			</run>
 		</groups>
 		<classes>
-		<!--	<class name="testCases.LoginTestCase"></class> -->
+			<class name="testCases.LoginTestCase"></class> 
 			<class name="testCases.ClientTestCases"></class>
-			<!--<class name="testCases.WorkersTestCases"></class>
+			<class name="testCases.WorkersTestCases"></class>
 			<class name="testCases.TimeSheetTestCases"></class>
-			<class name="testCases.DashBoardTestCases"></class> -->
+			<class name="testCases.DashBoardTestCases"></class> 
 		</classes>
 	</test>
 	<!-- 
