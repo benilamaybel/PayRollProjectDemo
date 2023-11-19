@@ -1,5 +1,6 @@
 package elementRepository;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -14,6 +15,8 @@ public class LoginPage {
 	WebDriver driver;
 	GeneralUtilities generalutility = new GeneralUtilities();
 	ExcelUtilities excelutility = new ExcelUtilities();
+	public static String expectedValidLoginText = "";
+	public static String expectedInvalidLoginText = "";
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -38,7 +41,6 @@ public class LoginPage {
 			excelInputList = excelutility.getDataFromExcel(filePath, fileName, sheetName);
 			userCredentials[0] = excelInputList.get(2);
 			userCredentials[1] = excelInputList.get(3);
-
 		} catch (Exception e) {
 			System.out.println("An Exception Occurred!!!" + e);
 		}
@@ -65,6 +67,18 @@ public class LoginPage {
 
 	public String getLoginPageText() {
 		return generalutility.getElementText(loginPageText);
+	}
+
+	public void getExpectedDataFromExcel(String filePath, String fileName, String sheetName) {
+		List<String> excelInputList;
+		try {
+			excelInputList = excelutility.getDataFromExcel(filePath, fileName, sheetName);
+			expectedValidLoginText = excelInputList.get(5);
+			expectedInvalidLoginText = excelInputList.get(7);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
