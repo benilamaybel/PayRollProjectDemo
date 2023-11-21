@@ -30,6 +30,10 @@ public class TimeSheet {
 	static String inputUnits;
 	static String inputPay;
 	static String inputBill;
+	public static String expectedTimeSheetPageTitle;
+	public static String expectedPaySlipAlert;
+	public static String expectedInvoiceAlert;
+	public static String expectedPaySlipGenerateSuccessMessage;
 
 	public TimeSheet(WebDriver driver) {
 		this.driver = driver;
@@ -88,10 +92,6 @@ public class TimeSheet {
 	WebElement generatePayslip;
 	@FindBy(xpath = "//button[@class='btn btn-warning btn-responsive invoice']")
 	WebElement generateInvoice;
-	@FindBy(xpath = "//a[@class='dropdown-toggle']")
-	WebElement userDropdown;
-	@FindBy(xpath = "//a[@class='logout-btn']")
-	WebElement logoutBtn;
 
 	public void gotoTimeSheet() {
 		waitutility.waitElementClickable(driver, timeSheetMenu);
@@ -192,10 +192,17 @@ public class TimeSheet {
 		generalutility.dismissAlert(driver);
 	}
 
-	public void performLogout(WebDriver driver) {
-		userDropdown.click();
-		waitutility.waitElementClickable(driver, logoutBtn);
-		logoutBtn.click();
+	public void getExpectedDataFromExcel(String filePath, String fileName, String sheetName) {
+		List<String> excelInputList;
+		try {
+			excelInputList = excelutility.getDataFromExcel(filePath, fileName, sheetName);
+			expectedTimeSheetPageTitle = excelInputList.get(23);
+			expectedPaySlipAlert = excelInputList.get(25);
+			expectedPaySlipGenerateSuccessMessage = excelInputList.get(27);
+			expectedInvoiceAlert = excelInputList.get(29);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
 }

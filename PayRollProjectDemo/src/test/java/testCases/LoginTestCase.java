@@ -18,8 +18,8 @@ public class LoginTestCase extends BaseClass {
 	public void verifyValidLogin() throws IOException {
 		loginpage = new LoginPage(driver);
 		dashboard = new Dashboard(driver);
-		loginpage.performloginUsingExcelInput(Constant.excelFilePath, inputExcelFileName, loginSheetName);
-		loginpage.getExpectedDataFromExcel(Constant.excelFilePath, inputExcelFileName, loginSheetName);
+		loginpage.performloginUsingExcelInput(Constant.excelFilePath, Constant.inputExcelFileName, Constant.loginSheetName);
+		loginpage.getExpectedDataFromExcel(Constant.excelFilePath, Constant.inputExcelFileName, Constant.loginSheetName);
 		String ActualText = dashboard.verifyDashboardText();
 		Assert.assertEquals(ActualText, LoginPage.expectedValidLoginText, Constant.loginpage_verifyValidLogin);
 	}
@@ -33,7 +33,7 @@ public class LoginTestCase extends BaseClass {
 	public void verifyInValidLogin(String userName, String passWord) {
 		loginpage = new LoginPage(driver);
 		loginpage.performlogin(userName, passWord);
-		loginpage.getExpectedDataFromExcel(Constant.excelFilePath, inputExcelFileName, loginSheetName);
+		loginpage.getExpectedDataFromExcel(Constant.excelFilePath, Constant.inputExcelFileName, Constant.loginSheetName);
 		String ActualText = loginpage.getValidationError();
 		Assert.assertEquals(ActualText, LoginPage.expectedInvalidLoginText, Constant.loginpage_verifyInValidLogin);
 	}

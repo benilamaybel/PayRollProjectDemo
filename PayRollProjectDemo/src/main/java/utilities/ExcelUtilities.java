@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -35,21 +36,22 @@ public class ExcelUtilities {
 	 */
 	public List<String> getDataFromExcel(String filePath, String fileName, String sheetName) throws IOException {
 		f = new FileInputStream(System.getProperty("user.dir") + filePath + fileName);
-		XSSFWorkbook wb = new XSSFWorkbook(f);
-		XSSFSheet sheet = wb.getSheet(sheetName);
-		Iterator<Row> itr = sheet.iterator();
-		List<String> list = new ArrayList<String>();
+		try (XSSFWorkbook wb = new XSSFWorkbook(f)) {
+			XSSFSheet sheet = wb.getSheet(sheetName);
+			Iterator<Row> itr = sheet.iterator();
+			List<String> list = new ArrayList<String>();
 
-		while (itr.hasNext()) {
-			Row row = itr.next();
-			Iterator<Cell> cellIterator = row.cellIterator();
-			while (cellIterator.hasNext()) {
-				Cell cell = cellIterator.next();
-				HSSFDataFormatter hdf = new HSSFDataFormatter();
-				list.add(hdf.formatCellValue(cell));
+			while (itr.hasNext()) {
+				Row row = itr.next();
+				Iterator<Cell> cellIterator = row.cellIterator();
+				while (cellIterator.hasNext()) {
+					Cell cell = cellIterator.next();
+					HSSFDataFormatter hdf = new HSSFDataFormatter();
+					list.add(hdf.formatCellValue(cell));
+				}
 			}
+			return list;
 		}
-		return list;
 	}
 
 }

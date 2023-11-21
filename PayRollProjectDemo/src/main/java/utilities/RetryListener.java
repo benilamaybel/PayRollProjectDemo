@@ -9,7 +9,6 @@ import org.testng.annotations.ITestAnnotation;
 public class RetryListener implements IAnnotationTransformer {
 	@Override
 	public void transform(final ITestAnnotation annotation, final Class testClass, final Constructor testConstructor,
-
 			final Method testMethod) {
 		annotation.setRetryAnalyzer(Retry.class);
 	}

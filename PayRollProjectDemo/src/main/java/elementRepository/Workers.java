@@ -18,6 +18,11 @@ public class Workers {
 	GeneralUtilities generalutility = new GeneralUtilities();;
 	WaitUtilities waitutility = new WaitUtilities();;
 	ExcelUtilities excelutility = new ExcelUtilities();
+	
+	public static String SearchString;
+	public static String workerName;
+	public static String setDate;
+	public static String expectedDeleteAlertMessage;
 
 	public Workers(WebDriver driver) {
 		this.driver = driver;
@@ -111,7 +116,7 @@ public class Workers {
 		String date = bankStartDate.getAttribute("value");
 		return date;
 	}
-
+/*
 	public String getSearchStringFromExcel(String filePath, String excelFileName, String sheetName) {
 		String SearchString = "";
 		try {
@@ -147,10 +152,24 @@ public class Workers {
 		}
 		return setDate;
 	}
-
+*/
 	public String verifyDeleteFirstRecord() {
 		firstDeleteItem.click();
 		waitutility.waitAlertDisplayed(driver);
 		return generalutility.getAlertText(driver);
+	}
+	public void getDataFromExcel(String filePath, String fileName, String sheetName) {
+		List<String> excelInputList;
+		try {
+			excelInputList = excelutility.getDataFromExcel(filePath, fileName, sheetName);
+			 workerName = excelInputList.get(1);
+		SearchString = excelInputList.get(3);
+setDate = excelInputList.get(5);
+expectedDeleteAlertMessage = excelInputList.get(7);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

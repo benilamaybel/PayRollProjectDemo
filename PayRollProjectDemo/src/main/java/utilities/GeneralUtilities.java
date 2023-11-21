@@ -14,11 +14,10 @@ import org.openqa.selenium.support.ui.Select;
 
 public class GeneralUtilities {
 
-	WaitUtilities wu = new WaitUtilities();
+	WaitUtilities waitutility = new WaitUtilities();
 
 	public String getElementText(WebElement element) {
 		return element.getText();
-
 	}
 
 	public void selectDropdownByIndex(WebElement element, int index) {
@@ -127,14 +126,13 @@ public class GeneralUtilities {
 				String locator = "//table[@class='table table-striped table-bordered']//tbody//tr[" + (j + 1) + "]//td["
 						+ (m + 1) + "]";
 				try {
-					wu.fluentWaitForVisibility(driver, driver.findElement(By.xpath(locator)));
+					waitutility.fluentWaitForVisibility(driver, driver.findElement(By.xpath(locator)));
 				} catch (StaleElementReferenceException e) {
-					wu.waitForStaleElement(driver, driver.findElement(By.xpath(locator)));
+					waitutility.waitForStaleElement(driver, driver.findElement(By.xpath(locator)));
 				}
 				WebElement element = driver.findElement(By.xpath(locator));
-				String elementText;
 				if (element.getText().equals(searchElement)) {
-					System.out.println("Element found!!");
+					// System.out.println("Element found!!");
 					found = 1;
 					break loop;
 				}

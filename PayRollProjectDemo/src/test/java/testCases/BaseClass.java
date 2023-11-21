@@ -66,11 +66,6 @@ public class BaseClass {
 			driver = new EdgeDriver();
 		}
 		driver.get(pro.getProperty("BaseURL"));
-		inputExcelFileName = pro.getProperty("ExcelFileName");
-		loginSheetName = pro.getProperty("LoginSheetName");
-		clientSheetName = pro.getProperty("ClientSheetName");
-		workerSheetName = pro.getProperty("WorkerSheetName");
-		timeSheetName = pro.getProperty("TimeSheetName");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WaitUtilities.implicitWait));
 	}

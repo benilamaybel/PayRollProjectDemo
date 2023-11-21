@@ -14,19 +14,22 @@ public class TimeSheetTestCases extends BaseClass {
 	@Test(groups = "Smoke")
 	public void createTimeSheetFromFile() throws InterruptedException {
 		loginpage = new LoginPage(driver);
-		loginpage.performloginUsingExcelInput(Constant.excelFilePath, inputExcelFileName, loginSheetName);
+		loginpage.performloginUsingExcelInput(Constant.excelFilePath, Constant.inputExcelFileName,
+				Constant.loginSheetName);
 		timesheet = new TimeSheet(driver);
+		timesheet.getExpectedDataFromExcel(Constant.excelFilePath, Constant.inputExcelFileName, Constant.timeSheetName);
 		timesheet.gotoTimeSheet();
-		String expected = "TIMESHEETS";
+		String expected = TimeSheet.expectedTimeSheetPageTitle;
 		String actual = timesheet.getPageTitle();
 		Assert.assertEquals(actual, expected, Constant.timesheetpage_verifyTimeSheetTitle);
 		timesheet.gotoCreateTimeSheet();
-		String imageFileName = pro.getProperty("TimeSheetImage");
-		timesheet.uploadTimeSheet(Constant.imageFilePath, imageFileName);
+		timesheet.uploadTimeSheet(Constant.imageFilePath, Constant.timeSheetImage);
 		String uploadedFileName = timesheet.getFileUploaded();
-		Assert.assertEquals(uploadedFileName, imageFileName, Constant.timesheetpage_createTimeSheetFileUpload);
+		Assert.assertEquals(uploadedFileName, Constant.timeSheetImage,
+				Constant.timesheetpage_createTimeSheetFileUpload);
 		timesheet.performUploadButtonClick();
-		timesheet.getTimeSheetDataFromExcel(Constant.excelFilePath, inputExcelFileName, timeSheetName);
+		timesheet.getTimeSheetDataFromExcel(Constant.excelFilePath, Constant.inputExcelFileName,
+				Constant.timeSheetName);
 		String timeSheetNumber = timesheet.enterTimeSheetDetails();
 		String atualNumber = timesheet.getTimeSheetNumberAfterSave();
 		Assert.assertEquals(atualNumber, timeSheetNumber, Constant.timesheetpage_createTimeSheetTimeSheetNo);
@@ -35,20 +38,21 @@ public class TimeSheetTestCases extends BaseClass {
 	@Test(groups = "Regression", priority = 2)
 	public void generatePaySlip() throws InterruptedException {
 		loginpage = new LoginPage(driver);
-		loginpage.performloginUsingExcelInput(Constant.excelFilePath, inputExcelFileName, loginSheetName);
+		loginpage.performloginUsingExcelInput(Constant.excelFilePath, Constant.inputExcelFileName,
+				Constant.loginSheetName);
 		timesheet = new TimeSheet(driver);
+		timesheet.getExpectedDataFromExcel(Constant.excelFilePath, Constant.inputExcelFileName, Constant.timeSheetName);
 		timesheet.gotoTimeSheet();
-		String expected = "TIMESHEETS";
+		String expected = TimeSheet.expectedTimeSheetPageTitle;
 		String actual = timesheet.getPageTitle();
 		Assert.assertEquals(actual, expected, Constant.timesheetpage_verifyTimeSheetTitle);
 		timesheet.clickGeneratePayslip();
-		String expectedPayslipAlert = "Are you sure you want to generate payslip?";
 		String actualPayslipAlert = timesheet.getTimeSheetAlertMessage();
-		Assert.assertEquals(actualPayslipAlert, expectedPayslipAlert, Constant.timesheetpage_verifyAlertText);
+		Assert.assertEquals(actualPayslipAlert, TimeSheet.expectedPaySlipAlert, Constant.timesheetpage_verifyAlertText);
 		timesheet.acceptTimeSheetAlert();
-		expectedPayslipAlert = "Payslip generated!!!";
 		actualPayslipAlert = timesheet.getTimeSheetAlertMessage();
-		Assert.assertEquals(actualPayslipAlert, expectedPayslipAlert, Constant.timesheetpage_verifyAlertText);
+		Assert.assertEquals(actualPayslipAlert, TimeSheet.expectedPaySlipGenerateSuccessMessage,
+				Constant.timesheetpage_verifyAlertText);
 		timesheet.acceptTimeSheetAlert();
 		Assert.assertEquals(actual, expected, Constant.timesheetpage_verifyTimeSheetTitle);
 	}
@@ -56,16 +60,18 @@ public class TimeSheetTestCases extends BaseClass {
 	@Test(groups = "Regression", priority = 2)
 	public void cancelInvoiceGeneraion() throws InterruptedException {
 		loginpage = new LoginPage(driver);
-		loginpage.performloginUsingExcelInput(Constant.excelFilePath, inputExcelFileName, loginSheetName);
+		loginpage.performloginUsingExcelInput(Constant.excelFilePath, Constant.inputExcelFileName,
+				Constant.loginSheetName);
 		timesheet = new TimeSheet(driver);
+		timesheet.getExpectedDataFromExcel(Constant.excelFilePath, Constant.inputExcelFileName, Constant.timeSheetName);
 		timesheet.gotoTimeSheet();
-		String expected = "TIMESHEETS";
+		String expected = TimeSheet.expectedTimeSheetPageTitle;
 		String actual = timesheet.getPageTitle();
 		Assert.assertEquals(actual, expected, Constant.timesheetpage_verifyTimeSheetTitle);
 		timesheet.clickGenerateInvoice();
-		String expectedPayslipAlert = "Are you sure you want to generate invoice?";
-		String actualPayslipAlert = timesheet.getTimeSheetAlertMessage();
-		Assert.assertEquals(actualPayslipAlert, expectedPayslipAlert, Constant.timesheetpage_verifyAlertText);
+		String actualInvoicAlert = timesheet.getTimeSheetAlertMessage();
+		Assert.assertEquals(actualInvoicAlert, TimeSheet.expectedInvoiceAlert,
+				Constant.timesheetpage_verifyInvoiceAlertText);
 		timesheet.dismissTimeSheetAlert();
 		Assert.assertEquals(actual, expected, Constant.timesheetpage_verifyTimeSheetTitle);
 	}
