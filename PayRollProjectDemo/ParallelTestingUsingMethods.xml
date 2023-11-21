@@ -1,0 +1,18 @@
+<suite name="PayrollProject" parallel="methods" thread-count="2">
+	<listeners>
+		<listener class-name="utilities.RetryListener" />
+		<listener class-name="utilities.ExtenetReport" />
+	</listeners>
+	<test name="ChromeTest">
+		<parameter name="browser" value="chrome"></parameter>
+		<classes>
+			<class name="testCases.LoginTestCase"></class>
+		</classes>
+	</test>
+	<test name="EdgeTest">
+		<parameter name="browser" value="edge"></parameter>
+		<classes>
+			<class name="testCases.LoginTestCase"></class>
+		</classes>
+	</test>
+</suite>

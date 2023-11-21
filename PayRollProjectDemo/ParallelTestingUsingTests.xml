@@ -6,22 +6,13 @@
 	<test name="ChromeTest">
 		<parameter name="browser" value="chrome"></parameter>
 		<classes>
-		<!--	<class name="testCases.LoginTestCase"></class>
-			<class name="testCases.ClientTestCases"></class>-->
 			<class name="testCases.WorkersTestCases"></class>
-		<!--	<class name="testCases.TimeSheetTestCases"></class>
-			<class name="testCases.DashBoardTestCases"></class>-->
 		</classes>
 	</test>
-	<!--
 	<test name="EdgeTest">
 		<parameter name="browser" value="edge"></parameter>
 		<classes>
-			<class name="testCases.LoginTestCase"></class>
-			<class name="testCases.ClientTestCases"></class>
-			<class name="testCases.WorkersTestCases"></class>
 			<class name="testCases.TimeSheetTestCases"></class>
-			<class name="testCases.DashBoardTestCases"></class>
 		</classes>
-	</test> -->
+	</test> 
 </suite>
